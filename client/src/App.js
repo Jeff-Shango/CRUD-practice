@@ -48,11 +48,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>CRUD APPLICATION</h1>
-
+      <h1>Date Night Movie List</h1>
+      <aside>This is where we will put movies on our watch list:<br/>Once the movie is complete, either delete it or update it to say "Favorited".</aside>
       <div className='form'>
         <label>Movie Name:</label>
-        <input 
+        <textarea 
           type="text" 
           name="movieName" 
           onChange={(e) => {
@@ -60,7 +60,7 @@ function App() {
           }}
         />
         <label>Review:</label>
-        <input 
+        <textarea 
           type="text" 
           name="review" 
           onChange={(e) => {
@@ -68,7 +68,7 @@ function App() {
           }}
         />
 
-        <button onClick={submitReview}>Submit</button>
+        <button onClick={submitReview} id="submitButton">Submit</button>
 
         {movieReviewList.map((val) => {
           return (
@@ -76,13 +76,13 @@ function App() {
             <h1>{val.movieName}</h1>
             <p>{val.movieReview}</p>
 
-            <button onClick={() => {deleteReview(val.movieName)}}>Delete</button>
+            <button id='deleteButton' onClick={() => {deleteReview(val.movieName)}}>Delete</button>
 
-            <input type='text' id='updateInput' onChange={(e) => {
+            <textarea type='text' id='updateInput' onChange={(e) => {
               setNewReview(e.target.value)
             }}/>
             
-            <button onClick={() => {updateReview(val.movieName)}}>Update</button>
+            <button id='updateButton' onClick={() => {updateReview(val.movieName)}}>Update</button>
           </div>
           );
         })}
