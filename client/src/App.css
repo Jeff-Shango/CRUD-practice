@@ -133,10 +133,43 @@ label {
 /* MEDIA QUERIES (SMALL DEVICES) */
 @media screen and (max-width: 600px) {
   .app {
+    width: var(--container-width-sm);
+
   }
 
-  body {
-    width: var(--container-width-sm);
+  aside {
+    width: 100%;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    margin-bottom: 3rem;
+}
+
+  aside::after {
+    border-bottom: 2px solid white;
+    content: "";
+    width: 10rem;
+    height: 3rem;
+    position: absolute;
+    left: 8.2rem;
   }
+
+  .form {
+    position: relative;
+    left: 6%;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+  }
+
+  #submitButton {
+    width: fit-content;
+    height: 3rem;
+  }
+
 }
 
