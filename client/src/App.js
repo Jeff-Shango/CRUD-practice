@@ -2,16 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Axios from 'axios';
 
-
-function shuffleReviews(movieReviewList, setMovieList) {
-  const shuffledList = [...movieReviewList].sort(() => Math.random() - 0.5);
-  setMovieList(shuffledList);
-}
-
 function App() {
   const [movieName, setMovieName] = useState("");
   const [review, setReview] = useState("");
   const [movieReviewList, setMovieList] = useState([])
+  const [currentMovie, setCurrentMovie] = useState(null);
 
   const [newReview, setNewReview] = useState("");
 
@@ -51,13 +46,35 @@ function App() {
     setNewReview("")
   }
 
+  const showRandomMovie = () => {
+    const randomIndex = Math.floor(Math.random() * movieReviewList.length);
+    setCurrentMovie(movieReviewList[randomIndex]);
+  }
+
 
   return (
     <div className="App">
+
+      {/* title  */}
       <h1>Date Night Movie List</h1>
       <aside>This is where we will put movies on our watch list:<br/>Once the movie is complete, either delete it or update it to say "Favorited".</aside>
+
+      {/* shuffle container  */}
+      <aside className='shuffleContainer'>
+        <h3>Shuffle Box</h3>
+        <button className='shuffleButton' onClick={showRandomMovie}/>
+        {currentMovie && (
+          <div>
+            <h4>{currentMovie.movieName}</h4>
+            <p>{currentMovie.movieReview}</p>
+          </div>
+        )}
+      </aside>
+
+
       <div className='form'>
-        <aside className=''></aside>
+        
+
         <label>Movie Name:</label>
         <textarea 
           type="text" 
@@ -76,7 +93,7 @@ function App() {
         />
 
         <button onClick={submitReview} id="submitButton">Submit</button>
-        <button onClick={() => shuffleReviews(movieReviewList, setMovieList)}>Shuffle</button>
+        <button onClick={showRandomMovie}>Shuffle</button>
 
         {movieReviewList.map((val) => {
           return (
